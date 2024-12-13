@@ -7,12 +7,10 @@
     "exported_at": "2024-03-21T00:00:00-03:00",
     "name": "Ubuntu VPS",
     "author": "support@pterodactyl.io",
-    "description": "Ubuntu VPS com seleção de versão durante a instalação.",
+    "description": "Ubuntu VPS com seleção interativa de versão durante a instalação.",
     "features": null,
     "docker_images": {
-        "Ubuntu 22.04": "ghcr.io/pterodactyl/ubuntu:22.04",
-        "Ubuntu 20.04": "ghcr.io/pterodactyl/ubuntu:20.04",
-        "Ubuntu 18.04": "ghcr.io/pterodactyl/ubuntu:18.04"
+        "Ubuntu Latest": "ubuntu:latest"
     },
     "file_denylist": [],
     "startup": "bash ./entrypoint.sh",
@@ -24,21 +22,10 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update && apt install -y git && git clone https://github.com/SEU_USUARIO/ubuntu-vps-egg.git . && bash ./install.sh",
-            "container": "ghcr.io/pterodactyl/installers:alpine",
-            "entrypoint": "ash"
+            "script": "apt update && apt install -y git dialog && git clone https://github.com/SEU_USUARIO/ubuntu-vps-egg.git . && bash ./install.sh",
+            "container": "ubuntu:latest",
+            "entrypoint": "bash"
         }
     },
-    "variables": [
-        {
-            "name": "Ubuntu Version",
-            "description": "Selecione a versão do Ubuntu que deseja instalar.",
-            "env_variable": "UBUNTU_VERSION",
-            "default_value": "22.04",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:22.04,20.04,18.04",
-            "field_type": "text"
-        }
-    ]
+    "variables": []
 }
